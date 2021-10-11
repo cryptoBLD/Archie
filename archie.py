@@ -46,7 +46,7 @@ def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.adjust_for_ambient_noise(source, duration=5)
+        r.adjust_for_ambient_noise(source, duration=1)
         audio = r.listen(source)
 
         try:
@@ -54,7 +54,6 @@ def takeCommand():
             print(f"user said:{statement}\n")
 
         except Exception as e:
-            speak("Pardon me, please say that again")
             return "None"
         return statement
 
@@ -77,7 +76,42 @@ if __name__ == '__main__':
             statement = takeCommand().lower()
 
             # Commands go here
+            if 'wikipedia' in statement:
+                speak('Searching Wikipedia...')
+                statement = statement.replace("wikipedia", "")
+                statement = statement.replace("search", "")
+                results = wikipedia.summary(statement, sentences=3)
+                speak("According to Wikipedia")
+                print(results)
+                speak(results)
 
+            elif 'start' in statement:
+                statement = statement.replace("start", "")
+                statement = statement.replace(" ", "")
+                TheApp = statement.capitalize()
+                os.startfile('C:\\Users\\cryptoBLD\\Desktop\\applications\\' + TheApp)
+
+            elif 'open youtube' in statement:
+                webbrowser.open_new_tab("https://www.youtube.com")
+                speak("Opening youtube now")
+                time.sleep(5)
+
+            elif 'open github' in statement:
+                webbrowser.open_new_tab("https://www.github.com")
+                speak("Opening Github now")
+                time.sleep(5)
+
+            elif 'open gmail' in statement:
+                webbrowser.open_new_tab("gmail.com")
+                speak("Opening Google Mail now")
+                time.sleep(5)
+
+            elif 'what can you' in statement:
+                speak("I have multiple capabilities like ")
+
+            elif 'who created you' in statement:
+                speak("my creator is crypto blade, i will open his github page for you")
+                webbrowser.open_new_tab("https://www.github.com/cryptoBLD")
 
 
         else:
