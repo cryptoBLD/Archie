@@ -18,6 +18,12 @@ import wolframalpha
 import json
 import requests
 
+apis = []
+
+for i in open('api.txt'):
+    apis.append(i)
+
+
 # Creating speech engine
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -112,7 +118,7 @@ if __name__ == '__main__':
                 webbrowser.open_new_tab(statement)
 
             elif "weather" in statement:
-                api_key = "16c80670876ad902383b30fbcd0f867d"
+                api_key = apis[0]
                 base_url = "https://api.openweathermap.org/data/2.5/weather?"
                 speak("what is the city name")
                 city_name = takeCommand()
