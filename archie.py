@@ -139,11 +139,12 @@ if __name__ == '__main__':
                           str(weather_description))
 
                 elif 'logout' in statement:
+                    speak('logging you out')
                     ctypes.windll.user32.LockWorkStation()
 
                 elif "shutdown" in statement:
                     speak("Shutting down your pc")
-                    subprocess.call(["shutdown", "/l"])
+                    os.system('shutdown /p /f')
 
         else:
             continue
