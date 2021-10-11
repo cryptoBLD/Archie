@@ -12,6 +12,7 @@ import wikipedia
 import webbrowser
 import os
 import time
+import ctypes
 import subprocess
 import wolframalpha
 import json
@@ -91,28 +92,58 @@ if __name__ == '__main__':
                 TheApp = statement.capitalize()
                 os.startfile('C:\\Users\\cryptoBLD\\Desktop\\applications\\' + TheApp)
 
-            elif 'open youtube' in statement:
-                webbrowser.open_new_tab("https://www.youtube.com")
-                speak("Opening youtube now")
-                time.sleep(5)
+            elif 'open' in statement:
+                term = statement.replace('open', '')
+                webbrowser.open_new_tab(f"https://www.{term}.com")
+                speak(f"Opening {term} now")
 
-            elif 'open github' in statement:
-                webbrowser.open_new_tab("https://www.github.com")
-                speak("Opening Github now")
-                time.sleep(5)
-
-            elif 'open gmail' in statement:
-                webbrowser.open_new_tab("gmail.com")
-                speak("Opening Google Mail now")
-                time.sleep(5)
-
-            elif 'what can you' in statement:
-                speak("I have multiple capabilities like ")
+            elif 'what can you do' in statement:
+                speak("I have multiple capabilities like opening various Webpages, starting applications, searching "
+                      "the web")
 
             elif 'who created you' in statement:
                 speak("my creator is crypto blade, i will open his github page for you")
                 webbrowser.open_new_tab("https://www.github.com/cryptoBLD")
 
+            elif 'google' in statement:
+                statement = statement.replace('google', '')
+                term = statement
+                speak(f"Opening {term} now")
+                webbrowser.open_new_tab(statement)
+
+            elif "weather" in statement:
+                api_key = "16c80670876ad902383b30fbcd0f867d"
+                base_url = "https://api.openweathermap.org/data/2.5/weather?"
+                speak("what is the city name")
+                city_name = takeCommand()
+                complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+                response = requests.get(complete_url)
+                x = response.json()
+                if x["cod"] != "404":
+                    y = x["main"]
+                    current_temperature = y["temp"]
+                    current_humidiy = y["humidity"]
+                    z = x["weather"]
+                    weather_description = z[0]["description"]
+                    speak(" Temperature in kelvin unit is " +
+                          str(current_temperature) +
+                          "\n humidity in percentage is " +
+                          str(current_humidiy) +
+                          "\n description  " +
+                          str(weather_description))
+                    print(" Temperature in kelvin unit = " +
+                          str(current_temperature) +
+                          "\n humidity (in percentage) = " +
+                          str(current_humidiy) +
+                          "\n description = " +
+                          str(weather_description))
+
+                elif 'logout' in statement:
+                    ctypes.windll.user32.LockWorkStation()
+
+                elif "shutdown" in statement:
+                    speak("Shutting down your pc")
+                    subprocess.call(["shutdown", "/l"])
 
         else:
             continue
