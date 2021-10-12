@@ -7,13 +7,11 @@ Description: AI Desktop Assistant named Archie
 import speech_recognition as sr
 import pyttsx3
 import datetime
-import pyaudio
 import wikipedia
 import webbrowser
 import os
 import time
 import ctypes
-import subprocess
 import wolframalpha
 import json
 import requests
@@ -82,7 +80,6 @@ if __name__ == '__main__':
             print("Yes Sir")
             statement = takeCommand().lower()
 
-            # Commands go here
             if 'wikipedia' in statement:
                 speak('Searching Wikipedia...')
                 statement = statement.replace("wikipedia", "")
