@@ -37,14 +37,14 @@ def speak(text):
 def wishMe():
     hour = datetime.datetime.now().hour
     if 0 <= hour < 12:
-        speak("Hello,Good Morning Sir")
-        print("Hello,Good Morning Sir")
+        speak("Hello, Good Morning Sir")
+        print("Hello, Good Morning Sir")
     elif 12 <= hour < 18:
-        speak("Hello,Good Afternoon Sir")
-        print("Hello,Good Afternoon Sir")
+        speak("Hello, Good Afternoon Sir")
+        print("Hello, Good Afternoon Sir")
     else:
-        speak("Hello,Good Evening Sir")
-        print("Hello,Good Evening Sir")
+        speak("Hello, Good Evening Sir")
+        print("Hello, Good Evening Sir")
 
 
 def takeCommand():
@@ -63,8 +63,8 @@ def takeCommand():
         return statement
 
 
-print("Loading your AI personal assistant Archie")
-speak("Loading your AI personal assistant Archie")
+print("Loading your AI personal assistant, Archie")
+speak("Loading your AI personal assistant, Archie")
 wishMe()
 
 if __name__ == '__main__':
